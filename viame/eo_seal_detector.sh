@@ -8,6 +8,6 @@ source ${VIAME_INSTALL}/setup_viame.sh
 
 # Run pipeline
 
-kwiver runner pipelines/eo_polarbear_detector.pipe \
+kwiver runner 2021_pipelines/eo_seal_detector.pipe \
               -s optical_detector_input:video_filename=eo_list_tif.txt
 

@@ -16,15 +16,15 @@ process out_adapt
 include ../common/common_eo_polarbear_detector.pipe
 
 connect from in_adapt.image
-        to   optical_detector_input.image
+        to   optical_detector.image
 
-# ==================================================================================
+#==================================================================================
 
-include ../common_default_initializer.pipe
+include ../common/common_default_initializer.pipe
 
 connect from in_adapt.timestamp
         to   track_initializer.timestamp
-connect from optical_detector_output.detected_object_set
+connect from optical_detector.detected_object_set
         to   track_initializer.detected_object_set
 
 connect from track_initializer.object_track_set

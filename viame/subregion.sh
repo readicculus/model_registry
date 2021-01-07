@@ -8,7 +8,7 @@ source ${VIAME_INSTALL}/setup_viame.sh
 
 # Run pipeline
 
-kwiver runner pipelines/ir_to_eo_subregion_detector.pipe \
+kwiver runner 2021_pipelines/ir_to_eo_subregion_detector.pipe \
               -s optical_input:video_filename=eo_list_tif.txt \
               -s thermal_input:video_filename=ir_list_tif.txt
 
