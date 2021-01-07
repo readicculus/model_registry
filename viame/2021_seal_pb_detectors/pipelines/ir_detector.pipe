@@ -1,0 +1,86 @@
+# ============================== GLOBAL PROPERTIES =================================
+# global pipeline config
+#
+config _pipeline:_edge
+   :capacity                                   10
+config _scheduler
+   :type                                                pythread_per_process
+# ==================================================================================
+
+process thermal_input
+  :: video_input
+  :video_filename                                       input_thermal_images.txt
+  :video_reader:type                                    image_list
+  :video_reader:image_list:sort_by_time                 true
+  block video_reader:image_list:image_reader
+    :type                                               add_timestamp_from_filename
+    block add_timestamp_from_filename
+      :image_reader:type                                ocv
+    endblock
+  endblock
+
+# ================================= IR DETECTOR ====================================
+
+process thermal_detector_input
+  :: image_filter
+  :filter:type                                 npy_percentile_norm
+
+#process thermal_detector_input
+#  :: percentile_norm_npy_16_to_8bit
+
+process thermal_detector
+  :: image_object_detector
+  :detector:type                               darknet
+
+  block detector:darknet
+    # Network config, weights, and names
+    relativepath net_config  =                 ../models/ir_yolo_tiny_1L64x80.cfg
+    relativepath weight_file =                 ../models/ir_yolo_tiny_1L64x80.weights
+    relativepath class_names =                 ../models/ir_yolo_tiny_1L64x80.names
+
+    # Prevent grayscale input from being reshaped 1c->3c
+    :gs_to_rgb                                 false
+    # Detector parameters
+    :thresh                                    0.01
+    :hier_thresh                               0.001
+    :gpu_index                                 0
+
+    # Image scaling parameters
+    :resize_option                             disabled
+  
+  endblock
+
+process thermal_detector_output
+  :: refine_detections
+  :refiner:type                                nms
+
+  block refiner:nms
+    :max_overlap                               0.80
+#:max_scale_difference                      0    # 0 means disabled
+    :nms_scale_factor                          1.0
+    :output_scale_factor                       1.0
+  endblock
+
+connect from thermal_input.image
+        to   thermal_detector_input.image
+
+connect from thermal_detector_input.image
+        to   thermal_detector.image
+
+connect from thermal_detector.detected_object_set
+        to   thermal_detector_output.detected_object_set
+
+# ================================== CSV WRITER ===================================
+
+process thermal_writer_csv
+  :: detected_object_output
+
+  # Type of file to output
+  :file_name                                   [CURRENT_TIME]_IR.csv
+  :frame_list_output                           [CURRENT_TIME]_IR_images.txt
+  :writer:type                                 viame_csv
+
+connect from thermal_detector_output.detected_object_set
+        to   thermal_writer_csv.detected_object_set
+connect from thermal_input.file_name
+        to   thermal_writer_csv.image_file_name
