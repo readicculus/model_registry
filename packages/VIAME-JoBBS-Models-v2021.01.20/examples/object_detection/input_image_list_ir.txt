@@ -1,0 +1,5 @@
+../example_imagery/arctic_seal_example_set1/test_kotz_2019_fl05_C_20190510_045635.996851_ir.tif
+../example_imagery/arctic_seal_example_set1/test_kotz_2019_fl05_C_20190510_045646.602715_ir.tif
+../example_imagery/arctic_seal_example_set1/test_kotz_2019_fl05_C_20190510_050445.377686_ir.tif
+../example_imagery/arctic_seal_example_set1/test_kotz_2019_fl05_C_20190510_050512.565276_ir.tif
+../example_imagery/arctic_seal_example_set1/test_kotz_2019_fl05_C_20190510_054145.310109_ir.tif
