@@ -47,6 +47,9 @@ process thermal_writer_csv
   :file_name                                   [CURRENT_TIME]_IR.csv
   :frame_list_output                           [CURRENT_TIME]_IR_images.txt
   :writer:type                                 viame_csv
+  
+  :writer:viame_csv:model_identifier           ir_yolo_tiny_1L64x80.cfg
+  :writer:viame_csv:version_identifier         VIAME-JoBBS-Models-v2021.02.11
 
 connect from thermal_detector_output.detected_object_set
         to   thermal_writer_csv.detected_object_set

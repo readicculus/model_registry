@@ -3,10 +3,6 @@
 #
 config _pipeline:_edge
   :capacity                                    5
-   
-config _scheduler
-   :type                                       pythread_per_process
-
 
 # =============================================================================
 process input
@@ -32,7 +28,7 @@ process detector_writer
   :writer:type                                 viame_csv
 
   :writer:viame_csv:model_identifier           eo_pb_yolo_tiny_3l.cfg
-  :writer:viame_csv:version_identifier         versionstring  
+  :writer:viame_csv:version_identifier         VIAME-JoBBS-Models-v2021.02.11  
   
 connect from optical_detector_output.detected_object_set
         to   detector_writer.detected_object_set

@@ -4,9 +4,6 @@
 config _pipeline:_edge
    :capacity                                   10
 
-config _scheduler
-  :type                                        pythread_per_process
-
 # ==================================================================================
 process in_adapt
  :: input_adapter
@@ -27,12 +24,13 @@ include ../common_default_initializer.pipe
 
 connect from in_adapt.timestamp
         to   track_initializer.timestamp
+
 connect from optical_detector_output.detected_object_set
         to   track_initializer.detected_object_set
 
 connect from track_initializer.object_track_set
         to   out_adapt.object_track_set
 
-connect from in_adapt.file_name
-        to   out_adapt.file_name
+connect from in_adapt.timestamp
+        to   out_adapt.timestamp
 # -- end of file --
