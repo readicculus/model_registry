@@ -170,21 +170,30 @@ process optical_writer_csv
   :: detected_object_output
 
   # Type of file to output
-  :file_name                                   [CURRENT_TIME]_EO.csv
-  :frame_list_output                           [CURRENT_TIME]_EO_images.txt
+  :file_name                                   SUBREGION_TRIGGER_[CURRENT_TIME]_EO.csv
+  :frame_list_output                           SUBREGION_TRIGGER_[CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
+
+  :writer:viame_csv:model_identifier           eo_pb_yolo_tiny_3l.cfg,eo_seals_yolo_tiny_3l_512_1to1bg_nounk.cfg
+  :writer:viame_csv:version_identifier         versionstring
 
 connect from optical_detector_output.detected_object_set
         to   optical_writer_csv.detected_object_set
-
+connect from optical_input.file_name
+        to   optical_writer_csv.image_file_name
 
 process thermal_writer_csv
   :: detected_object_output
 
   # Type of file to output
-  :file_name                                   [CURRENT_TIME]_IR.csv
-  :frame_list_output                           [CURRENT_TIME]_IR_images.txt
+  :file_name                                   SUBREGION_TRIGGER_[CURRENT_TIME]_IR.csv
+  :frame_list_output                           SUBREGION_TRIGGER_[CURRENT_TIME]_IR_images.txt
   :writer:type                                 viame_csv
 
+  :writer:viame_csv:model_identifier           ir_yolo_tiny_1L64x80.cfg
+  :writer:viame_csv:version_identifier         versionstring  
+  
 connect from thermal_detector_output.detected_object_set
         to   thermal_writer_csv.detected_object_set
+connect from thermal_input.file_name
+        to   thermal_writer_csv.image_file_name

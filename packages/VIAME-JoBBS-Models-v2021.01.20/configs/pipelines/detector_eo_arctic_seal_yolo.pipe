@@ -12,7 +12,7 @@ config _scheduler
 process input
   :: video_input
   :video_filename                              input_list.txt
-  :frame_time                                  1
+  :frame_time                                  0
   :exit_on_invalid                             true
   :video_reader:type                           image_list
   :video_reader:image_list:image_reader:type   ocv
@@ -31,8 +31,13 @@ process detector_writer
   :file_name                                   detections_yolo_eo.csv
   :writer:type                                 viame_csv
 
+  :writer:viame_csv:model_identifier           eo_seals_yolo_tiny_3l_512_1to1bg_nounk.cfg
+  :writer:viame_csv:version_identifier         versionstring  
+
 connect from optical_detector_output.detected_object_set
         to   detector_writer.detected_object_set
+connect from input.file_name
+        to   detector_writer.image_file_name
 
 # =============================================================================
 #process draw_box
