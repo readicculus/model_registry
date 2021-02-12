@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+      with:
+        lfs: 'true'  
     #- name: Archive Release
     #  uses: thedoctor0/zip-release@master
     #  with:
