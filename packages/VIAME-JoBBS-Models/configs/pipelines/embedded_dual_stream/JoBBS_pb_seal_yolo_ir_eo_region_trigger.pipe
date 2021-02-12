@@ -54,7 +54,7 @@ process optical_subregion_selector1
   :max_subregion_count                         30
   :fixed_size                                  512
   :include_input_dets                          false
-  :threshold                                   0.2
+  :threshold                                   0.1
 
   :detector:type                               darknet
 
@@ -90,7 +90,7 @@ process optical_subregion_selector2
   :max_subregion_count                         2
   :fixed_size                                  416
   :include_input_dets                          false
-  :threshold                                   0.2
+  :threshold                                   0.1
 
   :detector:type                               darknet
 
