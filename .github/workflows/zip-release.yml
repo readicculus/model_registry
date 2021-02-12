@@ -1,7 +1,7 @@
 name: Create Archive
 on:
   release:
-    types: [published, prereleased]
+    types: [created]
 jobs:
   build:
     runs-on: ubuntu-latest
