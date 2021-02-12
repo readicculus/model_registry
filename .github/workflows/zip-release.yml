@@ -16,3 +16,4 @@ jobs:
       with:
           artifacts: "release.zip"
           token: ${{ secrets.GIT_TOKEN }}
+          tag: latest
