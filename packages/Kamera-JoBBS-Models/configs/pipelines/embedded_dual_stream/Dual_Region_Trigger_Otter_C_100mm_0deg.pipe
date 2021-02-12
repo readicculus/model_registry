@@ -16,6 +16,7 @@ process out_adapt
 
 process downsampler
   :: downsample
+  _non_blocking =                              4
 
 connect from in_adapt.image
         to   downsampler.input_1
@@ -39,7 +40,7 @@ connect from downsampler.output_3
 # ================================= EO DETECTOR ====================================
 process warp_ir_detections_to_eo
   :: itk_warp_detections
-  relativepath transformation_file = ../transformations/Kotz-2019-Flight5C_gmb.h5
+  relativepath transformation_file = ../transformations/Otter_RGB-IR_C_100mm_0deg_20200829.h5
 
 connect from thermal_detector_output.detected_object_set
         to   warp_ir_detections_to_eo.detected_object_set
