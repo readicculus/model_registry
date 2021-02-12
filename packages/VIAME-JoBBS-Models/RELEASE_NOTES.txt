@@ -1,8 +1,0 @@
-__ VIAME-JoBBS-Models-v2021.02.11 __
-important:
-- Fixed non-deterministic crashing
-- Added limit to polar bear trigger chips as it overdetects quite a bit.  Set to 2 frames.  Set seal trigger limit to 30 chips.
-- Added trigger threshold(set to 0.2 now) to subregion-trigger pipelines
-other:
-- Removed unnescessary pythread_per_process scheduler from non-python pipelines
-- Added pipeline version and model name to output csv
