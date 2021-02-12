@@ -7,12 +7,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Archive Release
-      uses: thedoctor0/zip-release@master
+    #- name: Archive Release
+    #  uses: thedoctor0/zip-release@master
+    #  with:
+    #    filename: 'VIAME-JoBBS-Models.zip'
+    #    path: packages/VIAME-JoBBS-Models/
+    - name: Easy Zip Files
+      uses: vimtor/action-zip@v1
       with:
-        filename: 'VIAME-JoBBS-Models.zip'
-        path: packages/VIAME-JoBBS-Models/
+        dest: VIAME-JoBBS-Models.zip
+        files: packages/VIAME-JoBBS-Models/
 
+    # Files or directories to zip
     - name: Upload Release
       uses: ncipollo/release-action@v1
       with:
