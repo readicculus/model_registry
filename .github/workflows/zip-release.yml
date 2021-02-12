@@ -1,6 +1,6 @@
 name: Create Archive
 on:
-  registry_package:
+  release:
     types: [published, prereleased]
 jobs:
   build:
