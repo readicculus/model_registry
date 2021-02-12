@@ -1,5 +1,7 @@
 name: Create Archive
-on: [push]
+on:
+  registry_package:
+    types: [published, prereleased]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -8,12 +10,13 @@ jobs:
     - name: Archive Release
       uses: thedoctor0/zip-release@master
       with:
-        filename: 'release.zip'
+        filename: 'VIAME-JoBBS-Models.zip'
         path: packages/VIAME-JoBBS-Models/
 
     - name: Upload Release
       uses: ncipollo/release-action@v1
       with:
-          artifacts: "release.zip"
+          artifacts: "VIAME-JoBBS-Models.zip"
           token: ${{ secrets.GIT_TOKEN }}
           tag: latest
+          allowUpdates: true
