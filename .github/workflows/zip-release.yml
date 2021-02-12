@@ -10,3 +10,9 @@ jobs:
       with:
         filename: 'release.zip'
         path: packages/VIAME-JoBBS-Models/
+
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
+      with:
+          artifacts: "release.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
