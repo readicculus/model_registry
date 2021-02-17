@@ -169,7 +169,7 @@ process optical_writer_csv
   :frame_list_output                           [CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           eo_pb_yolo_tiny_3l.cfg,eo_seals_yolo_tiny_3l_512_1to1bg_nounk.cfg
+  :writer:viame_csv:model_identifier           Dual_Region_Trigger_Otter_L_100mm_25deg
   :writer:viame_csv:version_identifier         VIAME-JoBBS-Models-v2021.02.1
 
 connect from optical_detector_output.detected_object_set

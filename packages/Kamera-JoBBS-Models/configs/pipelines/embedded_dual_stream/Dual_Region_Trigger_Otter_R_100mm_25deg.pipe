@@ -170,7 +170,7 @@ process optical_writer_csv
   :writer:type                                 viame_csv
 
   :writer:viame_csv:model_identifier           eo_pb_yolo_tiny_3l.cfg,eo_seals_yolo_tiny_3l_512_1to1bg_nounk.cfg
-  :writer:viame_csv:version_identifier         VIAME-JoBBS-Models-v2021.02.1
+  :writer:viame_csv:version_identifier         Dual_Region_Trigger_Otter_R_100mm_25deg
 
 connect from optical_detector_output.detected_object_set
         to   optical_writer_csv.detected_object_set
@@ -186,7 +186,7 @@ process thermal_writer_csv
   :writer:type                                 viame_csv
 
   :writer:viame_csv:model_identifier           ir_yolo_tiny_1L64x80.cfg
-  :writer:viame_csv:version_identifier         VIAME-JoBBS-Models-v2021.02.11
+  :writer:viame_csv:version_identifier         Dual_Region_Trigger_Otter_R_100mm_25deg
 
 connect from thermal_detector_output.detected_object_set
         to   thermal_writer_csv.detected_object_set
