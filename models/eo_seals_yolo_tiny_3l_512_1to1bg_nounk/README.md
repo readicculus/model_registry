@@ -29,14 +29,8 @@
 ![alt text](figures/roc.png)
 ![alt text](figures/precision_recall.png)
 
-## Train Set
-### Class distributions
-![alt text](figures/dataset_stats/train_labels.jpg)
-### Label Correlogram
-![alt text](figures/dataset_stats/train_labels_correlogram.jpg)
+Train Set          |  Test Set
+:-------------------------:|:-------------------------:
+![alt text](figures/dataset_stats/train_labels.jpg)  |  ![alt text](figures/dataset_stats/test_labels.jpg)
+![alt text](figures/dataset_stats/train_labels_correlogram.jpg)   |   ![alt text](figures/dataset_stats/test_labels_correlogram.jpg)
 
-## Test Set
-### Class distributions
-![alt text](figures/dataset_stats/test_labels.jpg)
-### Label Correlogram
-![alt text](figures/dataset_stats/test_labels_correlogram.jpg)
