@@ -5,7 +5,8 @@
 | Input Size    | 512x640       |
 | Classes       | Hotspot    |
 | Detection layers       | P<sub>3</sub>/8    |
-| Epochs       | ~24,000   |
+| Iterations       | ~24,000   |
+| Batch Size       | 64 |
 | Repo | AlexyAB/darknet b5ff7f4 |
 | Initialization       | random  |
 | Network       | [ir_yolo_tiny_1L64x80.cfg](model/ir_yolo_tiny_1L64x80.cfg)  |

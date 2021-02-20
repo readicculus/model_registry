@@ -1,9 +1,13 @@
 # ============================== GLOBAL PROPERTIES =================================
 # global pipeline config
 #
+include ../../JoBBS.config
+
 config _pipeline:_edge
    :capacity                                   5
    
+config _scheduler
+  :type                                                 pythread_per_process
 
 # ==================================================================================
 process in_adapt
@@ -48,44 +52,11 @@ process thermal_writer_csv
   :frame_list_output                           [CURRENT_TIME]_IR_images.txt
   :writer:type                                 viame_csv
   
-  :writer:viame_csv:model_identifier           ir_yolo_tiny_1L64x80.cfg
-  :writer:viame_csv:version_identifier         VIAME-JoBBS-Models-v2021.02.11
+  :writer:viame_csv:model_identifier           $CONFIG{global:ir_hotspot_model_identifier}
+  :writer:viame_csv:version_identifier         $CONFIG{global:version_identifier}
 
 connect from thermal_detector_output.detected_object_set
         to   thermal_writer_csv.detected_object_set
 connect from downsampler.output_4
         to   thermal_writer_csv.image_file_name
 
-# ==================================================================================
-
-#process thermal_filter_db
-#  :: initialize_object_tracks
-#  :track_initializer:type                      threshold
-#
-#  block track_initializer:threshold:filter
-#    :type                                      class_probablity_filter
-#    :class_probablity_filter:threshold         0.010
-#    :class_probablity_filter:keep_all_classes  true
-#  endblock
-
-#process thermal_writer_db
-#  :: write_object_track
-#  :file_name                                   none
-#  :writer:type                                 db
-#  :writer:db:conn_str                          postgresql:host=localhost;user=postgres
-#  :writer:db:video_name                        thermal_stream
-
-#connect from in_adapt.timestamp
-#        to   downsampler.timestamp
-
-#connect from downsampler.timestamp
-#        to   thermal_filter_db.timestamp
-#connect from thermal_detector_output.detected_object_set
-#        to   thermal_filter_db.detected_object_set
-
-#connect from downsampler.timestamp
-#        to   thermal_writer_db.timestamp
-#connect from thermal_filter_db.object_track_set
-#        to   thermal_writer_db.object_track_set
-
-# -- end of file --

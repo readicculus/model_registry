@@ -1,8 +1,6 @@
 # ============================== GLOBAL PROPERTIES =================================
 # global pipeline config
 #
-include ../../JoBBS.config
-
 config _pipeline:_edge
    :capacity                                   5
 
@@ -33,17 +31,45 @@ connect from in_adapt.file_name2
 
 # ================================= IR DETECTOR ====================================
 
-include ../common_ir_yolo_detector.pipe
+process thermal_detector_input
+  :: image_filter
+  :filter:type                                 npy_percentile_norm
+
+process thermal_detector
+  :: image_object_detector
+  :detector:type                               darknet
+
+  block detector:darknet
+    # Network config, weights, and names
+    relativepath net_config  =                 ../models/ir_yolo_tiny_1L64x80.cfg
+    relativepath weight_file =                 ../models/ir_yolo_tiny_1L64x80.weights
+    relativepath class_names =                 ../models/ir_yolo_tiny_1L64x80.names
+
+    # Detector parameters
+    :thresh                                    0.01
+    :hier_thresh                               0.001
+    :gpu_index                                 0
+
+    # Image scaling parameters
+    :resize_option                             disabled
+
+    # Prevent grayscale input from being loaded as rgb
+    :gs_to_rgb                                 false
+
+  endblock
 
 connect from downsampler.output_3
         to   thermal_detector_input.image
 
+connect from thermal_detector_input.image
+        to   thermal_detector.image
+        
 # ================================= EO DETECTOR ====================================
 process warp_ir_detections_to_eo
   :: itk_warp_detections
-  relativepath transformation_file = ../transformations/$CONFIG{global:transformation_file}
+  relativepath transformation_file = ../transformations/Kotz-2019-Flight5C_gmb.h5
 
-connect from thermal_detector_output.detected_object_set
+connect from thermal_detector.detected_object_set
         to   warp_ir_detections_to_eo.detected_object_set
 
 #  ===================================================
@@ -56,7 +82,7 @@ process optical_subregion_selector1
   :max_subregion_count                         30
   :fixed_size                                  512
   :include_input_dets                          false
-  :threshold                                   $CONFIG{global:trigger_threshold}
+  :threshold                                   0.1
 
   :detector:type                               darknet
 
@@ -68,7 +94,7 @@ process optical_subregion_selector1
     relativepath class_names =                 ../models/eo_seals_yolo_tiny_3l_512_1to1bg_nounk.names
 
     # Detector parameters
-    :thresh                                    $CONFIG{global:detection_threshold_seal}
+    :thresh                                    0.1
     :hier_thresh                               0.001
     :gpu_index                                 0
 
@@ -92,7 +118,7 @@ process optical_subregion_selector2
   :max_subregion_count                         2
   :fixed_size                                  416
   :include_input_dets                          false
-  :threshold                                   $CONFIG{global:trigger_threshold}
+  :threshold                                   0.1
 
   :detector:type                               darknet
 
@@ -104,7 +130,7 @@ process optical_subregion_selector2
     relativepath class_names =                 ../models/eo_pb_yolo_tiny_3l.names
 
     # Detector parameters
-    :thresh                                    $CONFIG{global:detection_threshold_polar_bear}
+    :thresh                                    0.5
     :hier_thresh                               0.001
     :gpu_index                                 0
 
@@ -153,7 +179,7 @@ connect from downsampler.output_2
 connect from downsampler.timestamp
         to   out_adapt.timestamp
 
-connect from thermal_detector_output.detected_object_set
+connect from thermal_detector.detected_object_set
         to   out_adapt.detected_object_set2
 connect from downsampler.output_4
         to   out_adapt.file_name2
@@ -170,8 +196,8 @@ process optical_writer_csv
   :frame_list_output                           [CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}_$CONFIG{global:eo_polar_bear_model_identifier}
-  :writer:viame_csv:version_identifier         $CONFIG{global:version_identifier}
+  :writer:viame_csv:model_identifier           eo_pb_yolo_tiny_3l.cfg,eo_seals_yolo_tiny_3l_512_1to1bg_nounk.cfg
+  :writer:viame_csv:version_identifier         VIAME-JoBBS-Models-v2021.02.1
 
 connect from optical_detector_output.detected_object_set
         to   optical_writer_csv.detected_object_set
@@ -186,11 +212,71 @@ process thermal_writer_csv
   :frame_list_output                           [CURRENT_TIME]_IR_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           $CONFIG{global:ir_hotspot_model_identifier}
-  :writer:viame_csv:version_identifier         $CONFIG{global:version_identifier}
+  :writer:viame_csv:model_identifier           ir_yolo_tiny_1L64x80.cfg
+  :writer:viame_csv:version_identifier         VIAME-JoBBS-Models-v2021.02.11
 
-connect from thermal_detector_output.detected_object_set
+connect from thermal_detector.detected_object_set
         to   thermal_writer_csv.detected_object_set
 connect from downsampler.output_4
         to   thermal_writer_csv.image_file_name
 
+# ================================== DB WRITERS ====================================
+
+#process optical_filter_db
+#  :: initialize_object_tracks
+#  :track_initializer:type                      threshold
+#
+#  block track_initializer:threshold:filter
+#    :type                                      class_probablity_filter
+#    :class_probablity_filter:threshold         0.010
+#    :class_probablity_filter:keep_all_classes  true
+#  endblock
+
+#process optical_writer_db
+#  :: write_object_track
+#  :file_name                                   none
+#  :writer:type                                 db
+#  :writer:db:conn_str                          postgresql:host=localhost;user=postgres
+#  :writer:db:video_name                        optical_stream
+
+#connect from in_adapt.timestamp
+#        to   downsampler.timestamp
+
+#connect from downsampler.timestamp
+#        to   optical_filter_db.timestamp
+#connect from optical_detector_output.detected_object_set
+#        to   optical_filter_db.detected_object_set
+
+#connect from downsampler.timestamp
+#        to   optical_writer_db.timestamp
+#connect from optical_filter_db.object_track_set
+#        to   optical_writer_db.object_track_set
+
+#process thermal_filter_db
+#  :: initialize_object_tracks
+#  :track_initializer:type                      threshold
+#
+#  block track_initializer:threshold:filter
+#    :type                                      class_probablity_filter
+#    :class_probablity_filter:threshold         0.010
+#    :class_probablity_filter:keep_all_classes  true
+#  endblock
+
+#process thermal_writer_db
+#  :: write_object_track
+#  :file_name                                   none
+#  :writer:type                                 db
+#  :writer:db:conn_str                          postgresql:host=localhost;user=postgres
+#  :writer:db:video_name                        thermal_stream
+
+#connect from downsampler.timestamp
+#        to   thermal_filter_db.timestamp
+#connect from thermal_detector_output.detected_object_set
+#        to   thermal_filter_db.detected_object_set
+
+#connect from downsampler.timestamp
+#        to   thermal_writer_db.timestamp
+#connect from thermal_filter_db.object_track_set
+#        to   thermal_writer_db.object_track_se
+
+# -- end of file --

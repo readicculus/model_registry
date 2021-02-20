@@ -1,6 +1,8 @@
 # ============================== GLOBAL PROPERTIES =================================
 # global pipeline config
 #
+include ../../JoBBS.config
+
 config _pipeline:_edge
    :capacity                                   5
 
@@ -52,44 +54,11 @@ process optical_writer_csv
   :frame_list_output                           [CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           eo_pb_yolo_tiny_3l.cfg
-  :writer:viame_csv:version_identifier         VIAME-JoBBS-Models-v2021.02.11  
+  :writer:viame_csv:model_identifier           $CONFIG{global:eo_polar_bear_model_identifier}
+  :writer:viame_csv:version_identifier         $CONFIG{global:version_identifier} 
   
 connect from optical_detector_output.detected_object_set
         to   optical_writer_csv.detected_object_set
 connect from downsampler.output_2
         to   optical_writer_csv.image_file_name
 
-# ==================================================================================
-
-#process optical_filter_db
-#  :: initialize_object_tracks
-#  :track_initializer:type                      threshold
-#
-#  block track_initializer:threshold:filter
-#    :type                                      class_probablity_filter
-#    :class_probablity_filter:threshold         0.010
-#    :class_probablity_filter:keep_all_classes  true
-#  endblock
-
-#process optical_writer_db
-#  :: write_object_track
-#  :file_name                                   none
-#  :writer:type                                 db
-#  :writer:db:conn_str                          postgresql:host=localhost;user=postgres
-#  :writer:db:video_name                        optical_stream
-
-#connect from in_adapt.timestamp
-#        to   downsampler.timestamp
-
-#connect from downsampler.timestamp
-#        to   optical_filter_db.timestamp
-#connect from optical_detector_output.detected_object_set
-#        to   optical_filter_db.detected_object_set
-
-#connect from downsampler.timestamp
-#        to   optical_writer_db.timestamp
-#connect from optical_filter_db.object_track_set
-#        to   optical_writer_db.object_track_set
-
-# -- end of file --

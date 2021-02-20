@@ -5,7 +5,8 @@
 | Input Size    | 512x512       |
 | Classes       | Ringed Seal, Bearded Seal    |
 | Detection layers       | P<sub>5</sub>/32, P<sub>4</sub>/16, P<sub>3</sub>/8    |
-| Epochs       | ~60,000   |
+| Iterations       | ~60,000   |
+| Batch Size       | 64 |
 | Repo | AlexyAB/darknet b5ff7f4 |
 | Initialization       | yolov3-tiny.conv.15   |
 | Training Net       | [eo_seals_yolo_tiny_3l_512_1to1bg_nounk_TRAIN.cfg](model/eo_seals_yolo_tiny_3l_512_1to1bg_nounk_TRAIN.cfg)  |
