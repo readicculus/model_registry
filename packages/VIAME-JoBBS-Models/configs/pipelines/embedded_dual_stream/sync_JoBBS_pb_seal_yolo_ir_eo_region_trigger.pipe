@@ -46,7 +46,7 @@ process thermal_detector
     relativepath class_names =                 ../models/ir_yolo_tiny_1L64x80.names
 
     # Detector parameters
-    :thresh                                    0.01
+    :thresh                                    $CONFIG{global:detection_threshold_hotspot}
     :hier_thresh                               0.001
     :gpu_index                                 0
 
@@ -82,7 +82,7 @@ process optical_subregion_selector1
   :max_subregion_count                         $CONFIG{global:seal_max_subregion_count}
   :fixed_size                                  512
   :include_input_dets                          false
-  :threshold                                   0.1
+  :threshold                                   $CONFIG{global:trigger_threshold}
 
   :detector:type                               darknet
 
@@ -94,7 +94,7 @@ process optical_subregion_selector1
     relativepath class_names =                 ../models/eo_seals_yolo_tiny_3l_512_1to1bg_nounk.names
 
     # Detector parameters
-    :thresh                                    0.1
+    :thresh                                    $CONFIG{global:detection_threshold_seal}
     :hier_thresh                               0.001
     :gpu_index                                 0
 
@@ -118,7 +118,7 @@ process optical_subregion_selector2
   :max_subregion_count                         $CONFIG{global:polar_bear_max_subregion_count}
   :fixed_size                                  416
   :include_input_dets                          false
-  :threshold                                   0.1
+  :threshold                                   $CONFIG{global:trigger_threshold}
 
   :detector:type                               darknet
 
@@ -130,7 +130,7 @@ process optical_subregion_selector2
     relativepath class_names =                 ../models/eo_pb_yolo_tiny_3l.names
 
     # Detector parameters
-    :thresh                                    0.5
+    :thresh                                    $CONFIG{global:detection_threshold_polar_bear}
     :hier_thresh                               0.001
     :gpu_index                                 0
 

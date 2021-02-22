@@ -24,7 +24,7 @@ process optical_detector1
     relativepath class_names =                 models/eo_seals_yolo_tiny_3l_512_1to1bg_nounk.names
 
     # Detector parameters
-    :thresh                                    $CONFIG{global:trigger_threshold}
+    :thresh                                    $CONFIG{global:detection_threshold_seal}
     :hier_thresh                               0.001
     :gpu_index                                 0
 
@@ -66,7 +66,7 @@ process optical_detector2
     relativepath class_names =                 models/eo_seals_yolo_tiny_3l_512_1to1bg_nounk.names
 
     # Detector parameters
-    :thresh                                    $CONFIG{global:trigger_threshold}
+    :thresh                                    $CONFIG{global:detection_threshold_seal}
     :hier_thresh                               0.001
     :gpu_index                                 0
 
