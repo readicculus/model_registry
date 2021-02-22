@@ -47,7 +47,7 @@ process thermal_detector
     relativepath class_names =                 ../models/ir_yolo_tiny_1L64x80.names
 
     # Detector parameters
-    :thresh                                    0.01
+    :thresh                                    $CONFIG{global:detection_threshold_hotspot}
     :hier_thresh                               0.001
     :gpu_index                                 0
 
@@ -80,10 +80,10 @@ process optical_subregion_selector1
   :: detect_in_subregions
 
   :method                                      fixed_size
-  :max_subregion_count                         30
+  :max_subregion_count                         $CONFIG{global:seal_max_subregion_count}
   :fixed_size                                  512
   :include_input_dets                          false
-  :threshold                                   0.1
+  :threshold                                   $CONFIG{global:trigger_threshold}
 
   :detector:type                               darknet
 
@@ -95,7 +95,7 @@ process optical_subregion_selector1
     relativepath class_names =                 ../models/eo_seals_yolo_tiny_3l_512_1to1bg_nounk.names
 
     # Detector parameters
-    :thresh                                    0.1
+    :thresh                                    $CONFIG{global:detection_threshold_seal}
     :hier_thresh                               0.001
     :gpu_index                                 0
 
@@ -116,10 +116,10 @@ process optical_subregion_selector2
   :: detect_in_subregions
 
   :method                                      fixed_size
-  :max_subregion_count                         2
+  :max_subregion_count                         $CONFIG{global:polar_bear_max_subregion_count}
   :fixed_size                                  416
   :include_input_dets                          false
-  :threshold                                   0.1
+  :threshold                                   $CONFIG{global:trigger_threshold}
 
   :detector:type                               darknet
 
@@ -131,7 +131,7 @@ process optical_subregion_selector2
     relativepath class_names =                 ../models/eo_pb_yolo_tiny_3l.names
 
     # Detector parameters
-    :thresh                                    0.5
+    :thresh                                    $CONFIG{global:detection_threshold_polar_bear}
     :hier_thresh                               0.001
     :gpu_index                                 0
 
@@ -197,8 +197,8 @@ process optical_writer_csv
   :frame_list_output                           [CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           eo_pb_yolo_tiny_3l.cfg,eo_seals_yolo_tiny_3l_512_1to1bg_nounk.cfg
-  :writer:viame_csv:version_identifier         Dual_Region_Trigger_Otter_R_100mm_25deg
+  :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}_$CONFIG{global:eo_polar_bear_model_identifier}
+  :writer:viame_csv:version_identifier         Sync_Dual_Region_Trigger_Otter_R_100mm_25deg
 
 connect from optical_detector_output.detected_object_set
         to   optical_writer_csv.detected_object_set
@@ -213,8 +213,9 @@ process thermal_writer_csv
   :frame_list_output                           [CURRENT_TIME]_IR_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           ir_yolo_tiny_1L64x80.cfg
-  :writer:viame_csv:version_identifier         Dual_Region_Trigger_Otter_R_100mm_25deg
+
+  :writer:viame_csv:model_identifier           $CONFIG{global:ir_hotspot_model_identifier}
+  :writer:viame_csv:version_identifier         Sync_Dual_Region_Trigger_Otter_R_100mm_25deg
 
 connect from thermal_detector.detected_object_set
         to   thermal_writer_csv.detected_object_set
