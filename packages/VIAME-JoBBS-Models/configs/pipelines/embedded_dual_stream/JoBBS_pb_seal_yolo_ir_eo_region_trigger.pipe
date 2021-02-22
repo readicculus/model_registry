@@ -53,7 +53,7 @@ process optical_subregion_selector1
   :: detect_in_subregions
 
   :method                                      fixed_size
-  :max_subregion_count                         30
+  :max_subregion_count                         $CONFIG{global:seal_max_subregion_count}
   :fixed_size                                  512
   :include_input_dets                          false
   :threshold                                   $CONFIG{global:trigger_threshold}
@@ -89,7 +89,7 @@ process optical_subregion_selector2
   :: detect_in_subregions
 
   :method                                      fixed_size
-  :max_subregion_count                         2
+  :max_subregion_count                         $CONFIG{global:polar_bear_max_subregion_count}
   :fixed_size                                  416
   :include_input_dets                          false
   :threshold                                   $CONFIG{global:trigger_threshold}
