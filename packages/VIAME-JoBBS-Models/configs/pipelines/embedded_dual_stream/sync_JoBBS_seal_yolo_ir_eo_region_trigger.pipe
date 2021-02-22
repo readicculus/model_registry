@@ -109,52 +109,8 @@ connect from warp_ir_detections_to_eo.detected_object_set
         to   optical_subregion_selector1.detected_object_set
 
 #  ===================================================
-# Detect Polar Bears
+#  NMS
 #  ===================================================
-process optical_subregion_selector2
-  :: detect_in_subregions
-
-  :method                                      fixed_size
-  :max_subregion_count                         $CONFIG{global:polar_bear_max_subregion_count}
-  :fixed_size                                  416
-  :include_input_dets                          false
-  :threshold                                   0.1
-
-  :detector:type                               darknet
-
-  block detector:darknet
-
-    # Network config, weights, and names
-    relativepath net_config  =                 ../models/eo_pb_yolo_tiny_3l.cfg
-    relativepath weight_file =                 ../models/eo_pb_yolo_tiny_3l.weights
-    relativepath class_names =                 ../models/eo_pb_yolo_tiny_3l.names
-
-    # Detector parameters
-    :thresh                                    0.5
-    :hier_thresh                               0.001
-    :gpu_index                                 0
-
-    # Image scaling parameters
-    :resize_option                             maintain_ar
-    :scale                                     1.0
-  endblock
-
-connect from downsampler.output_1
-        to   optical_subregion_selector2.image
-connect from warp_ir_detections_to_eo.detected_object_set
-        to   optical_subregion_selector2.detected_object_set
-
-#  ===================================================
-# Combine Seal + Polar Bear dets then NMS
-#  ===================================================
-process optical_detector_combined
-  :: merge_detection_sets
-
-connect from optical_subregion_selector1.detected_object_set
-        to   optical_detector_combined.detected_object_set1
-connect from optical_subregion_selector2.detected_object_set
-        to   optical_detector_combined.detected_object_set2
-
 process optical_detector_output
   :: refine_detections
   :refiner:type                                nms
@@ -166,7 +122,7 @@ process optical_detector_output
     :output_scale_factor                       1.0
   endblock
 
-connect from optical_detector_combined.detected_object_set
+connect from optical_subregion_selector1.detected_object_set
         to   optical_detector_output.detected_object_set
 
 
@@ -196,7 +152,7 @@ process optical_writer_csv
   :frame_list_output                           [CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}_$CONFIG{global:eo_polar_bear_model_identifier}
+  :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}
   :writer:viame_csv:version_identifier         $CONFIG{global:version_identifier}
 
 connect from optical_detector_output.detected_object_set
@@ -219,4 +175,3 @@ connect from thermal_detector.detected_object_set
         to   thermal_writer_csv.detected_object_set
 connect from downsampler.output_4
         to   thermal_writer_csv.image_file_name
-
