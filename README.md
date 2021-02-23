@@ -2,7 +2,7 @@
 **JoBBS Survey**  \
 **Kamera-JoBBS-Models** \
 Package for in-flight detector deployement in the Kamera system.  \
-[Kamera-JoBBS-Models-v2021.02.19.tar.gz](packages/archives/Kamera-JoBBS-Models-v2021.02.19.tar.gz)
+[Kamera-JoBBS-Models-v2021.02.19.tar.gz](https://viame.kitware.com/api/v1/file/603420d4a267a85e9c32821b/download)
 
 **VIAME-JoBBS-Models**  \
 Package for detector use in VIAME GUI, SEAL-TK GUI, and through command line bash scripts.  \
