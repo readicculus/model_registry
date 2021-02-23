@@ -1,5 +1,6 @@
 __ VIAME-JoBBS-Models-v2021.02.23 __
 - Add threshold to output csv info in format model_name@threshold
+- Change output filenames to contain the pipeline filename that was run
 
 __ VIAME-JoBBS-Models-v2021.02.22 __
 - Added config see configs/JoBBS.config
