@@ -1,7 +1,11 @@
+__ VIAME-JoBBS-Models-v2021.02.23 __
+- Add threshold to output csv info in format model_name@threshold
+
 __ VIAME-JoBBS-Models-v2021.02.22 __
 - Added config see configs/JoBBS.config
 - Added synchronous(sync) trigger pipelines
 - Added ir->eo seal only trigger pipeline.  Polar bear detectors are still poor and sometimes detect seals as bears with high confidence which overrides the seal detection so if evaluating for seal results this allows to exclude the polar bear detector.
+- Added .bat files for windows command line usage
 
 __ VIAME-JoBBS-Models-v2021.02.11 __
 important:

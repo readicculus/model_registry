@@ -52,7 +52,7 @@ process thermal_writer_csv
   :frame_list_output                           [CURRENT_TIME]_IR_images.txt
   :writer:type                                 viame_csv
   
-  :writer:viame_csv:model_identifier           $CONFIG{global:ir_hotspot_model_identifier}
+  :writer:viame_csv:model_identifier           $CONFIG{global:ir_hotspot_model_identifier}@CONFIG{global:detection_threshold_hotspot}
   :writer:viame_csv:version_identifier         $CONFIG{global:version_identifier}
 
 connect from thermal_detector_output.detected_object_set

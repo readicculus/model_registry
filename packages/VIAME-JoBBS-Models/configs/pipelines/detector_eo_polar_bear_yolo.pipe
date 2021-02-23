@@ -29,30 +29,10 @@ process detector_writer
   :file_name                                   detections_yolo_eo.csv
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           $CONFIG{global:eo_polar_bear_model_identifier}
+  :writer:viame_csv:model_identifier           $CONFIG{global:eo_polar_bear_model_identifier}@CONFIG{global:detection_threshold_polar_bear}
   :writer:viame_csv:version_identifier         $CONFIG{global:version_identifier} 
   
 connect from optical_detector_output.detected_object_set
         to   detector_writer.detected_object_set
 connect from input.file_name
         to   detector_writer.image_file_name
-        
-# =============================================================================
-#process draw_box
-#:: draw_detected_object_set
-#  :draw_algo:type                              ocv
-#
-#process image_writer
-#  :: image_writer
-#  :file_name_template                          eo_detections%06d.jpg
-#  :image_writer:type                           ocv
-#
-#connect from input.image
-#        to   draw_box.image
-#connect from optical_detector_output.detected_object_set
-#        to   draw_box.detected_object_set
-#
-#connect from draw_box.image
-#        to   image_writer.image
-
-# -- end of file --

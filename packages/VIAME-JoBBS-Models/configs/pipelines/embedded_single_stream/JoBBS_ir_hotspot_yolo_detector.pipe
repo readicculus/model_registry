@@ -35,4 +35,4 @@ connect from track_initializer.object_track_set
 
 connect from in_adapt.timestamp
         to   out_adapt.timestamp
-# -- end of file --
+
