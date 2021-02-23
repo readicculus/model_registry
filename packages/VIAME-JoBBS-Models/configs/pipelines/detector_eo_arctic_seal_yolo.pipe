@@ -30,7 +30,7 @@ process detector_writer
   
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}@CONFIG{global:detection_threshold_seal}
+  :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}@$CONFIG{global:detection_threshold_seal}
   :writer:viame_csv:version_identifier         $CONFIG{global:version_identifier}
 
 connect from optical_detector_output.detected_object_set
