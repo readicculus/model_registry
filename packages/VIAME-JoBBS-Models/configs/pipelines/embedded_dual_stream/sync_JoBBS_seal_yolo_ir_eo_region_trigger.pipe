@@ -152,7 +152,7 @@ process optical_writer_csv
   :frame_list_output                           sync_JoBBS_seal_yolo_ir_eo_region_trigger-[CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}@$CONFIG{global:detection_threshold_seal}
+  :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}@$CONFIG{global:detection_threshold_seal} trigger@$CONFIG{global:trigger_threshold}
   :writer:viame_csv:version_identifier         $CONFIG{global:version_identifier}
 
 connect from optical_detector_output.detected_object_set
