@@ -29,7 +29,9 @@ process detector_writer
   :: detected_object_output
 
   # Type of file to output
-  :file_name                                   detections_yolo_ir.csv
+  :file_name                                   detector_ir_yolo-[CURRENT_TIME]_IR.csv
+  :frame_list_output                           detector_ir_yolo-[CURRENT_TIME]_IR_images.txt
+
   :writer:type                                 viame_csv
 
   :writer:viame_csv:model_identifier           $CONFIG{global:ir_hotspot_model_identifier}@CONFIG{global:detection_threshold_hotspot}

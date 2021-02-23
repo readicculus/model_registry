@@ -50,8 +50,8 @@ process optical_writer_csv
   :: detected_object_output
 
   # Type of file to output
-  :file_name                                   [CURRENT_TIME]_EO.csv
-  :frame_list_output                           [CURRENT_TIME]_EO_images.txt
+  :file_name                                   JoBBS_eo_arctic_seal_yolo_detector-[CURRENT_TIME]_EO.csv
+  :frame_list_output                           JoBBS_eo_arctic_seal_yolo_detector-[CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
 
   :writer:viame_csv:model_identifier		       $CONFIG{global:eo_seal_model_identifier}@CONFIG{global:detection_threshold_seal}
