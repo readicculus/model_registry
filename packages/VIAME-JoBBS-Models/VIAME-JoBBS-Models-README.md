@@ -34,11 +34,11 @@ located in `configs/pipelines/embedded_dual_stream/`
 | :------------- | :------------- |
 | `JoBBS_eo_arctic_seal_yolo_detector.pipe` | Detect seals in full frame EO images by chipping.     |
 | `JoBBS_eo_polar_bear_yolo_detector.pipe` | Detect polar bears in full frame EO images by chipping.     |
-| `JoBBS_ir_hotspot_yolo_detector` | Detect hotspots in IR images.     |
-| `JoBBS_pb_seal_yolo_ir_eo_region_trigger` | Detect hotspots in IR images then detect polar bears and seals in subregions of the EO image based on the projected IR detections.     |
-| `sync_JoBBS_pb_seal_yolo_ir_eo_region_trigger` | Synchronous execution version of the previous pipeline.  |
-| `JoBBS_seal_yolo_ir_eo_region_trigger` | Same as the previous one except **only runs seal detector** on the EO subregions.   **Important Note:** If evaluating seal detection results using a trigger pipeline use this pipeline.  Because the polar bear model is still quite poor it will predict some seals with high confidence and the pipeline will output seals with the label polar bear as the confidence was higher than the seal detection. |
-| `sync_JoBBS_seal_yolo_ir_eo_region_trigger` | Synchronous execution version of the seal only trigger pipeline.  |
+| `JoBBS_ir_hotspot_yolo_detector.pipe` | Detect hotspots in IR images.     |
+| `JoBBS_pb_seal_yolo_ir_eo_region_trigger.pipe` | Detect hotspots in IR images then detect polar bears and seals in subregions of the EO image based on the projected IR detections.     |
+| `sync_JoBBS_pb_seal_yolo_ir_eo_region_trigger.pipe` | Synchronous execution version of the previous pipeline.  |
+| `JoBBS_seal_yolo_ir_eo_region_trigger.pipe` | Same as the previous one except **only runs seal detector** on the EO subregions.   **Important Note:** If evaluating seal detection results using a trigger pipeline use this pipeline.  Because the polar bear model is still quite poor it will predict some seals with high confidence and the pipeline will output seals with the label polar bear as the confidence was higher than the seal detection. |
+| `sync_JoBBS_seal_yolo_ir_eo_region_trigger.pipe` | Synchronous execution version of the seal only trigger pipeline.  |
 
 Notes:  
 
