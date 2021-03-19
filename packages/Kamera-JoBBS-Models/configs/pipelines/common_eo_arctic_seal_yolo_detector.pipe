@@ -1,6 +1,6 @@
 # ==================================================================================
 # Threaded seal detector file
-include ../JoBBS.config
+include JoBBS.config
 
 process optical_detector_input
   :: image_filter

@@ -1,6 +1,8 @@
 # ============================== GLOBAL PROPERTIES =================================
 # global pipeline config
 #
+include ../JoBBS.config
+
 config _pipeline:_edge
    :capacity                                   5
 
@@ -165,8 +167,8 @@ process optical_writer_csv
   :: detected_object_output
 
   # Type of file to output
-  :file_name                                   [CURRENT_TIME]_EO.csv
-  :frame_list_output                           [CURRENT_TIME]_EO_images.txt
+  :file_name                                   /$ENV{DETECTION_CSV_DIR}/$ENV{NODE_HOSTNAME}_[CURRENT_TIME]_EO.csv
+  :frame_list_output                           /$ENV{DETECTION_CSV_DIR}/$ENV{NODE_HOSTNAME}_[CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
 
   :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}_$CONFIG{global:eo_polar_bear_model_identifier}
@@ -181,8 +183,8 @@ process thermal_writer_csv
   :: detected_object_output
 
   # Type of file to output
-  :file_name                                   [CURRENT_TIME]_IR.csv
-  :frame_list_output                           [CURRENT_TIME]_IR_images.txt
+  :file_name                                   /$ENV{DETECTION_CSV_DIR}/$ENV{NODE_HOSTNAME}_[CURRENT_TIME]_IR.csv
+  :frame_list_output                           /$ENV{DETECTION_CSV_DIR}/$ENV{NODE_HOSTNAME}_[CURRENT_TIME]_IR_images.txt
   :writer:type                                 viame_csv
 
   :writer:viame_csv:model_identifier           $CONFIG{global:ir_hotspot_model_identifier}

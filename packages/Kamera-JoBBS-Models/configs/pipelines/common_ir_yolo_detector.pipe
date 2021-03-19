@@ -1,5 +1,6 @@
 # ==================================================================================
 # Threaded seal detector file
+include JoBBS.config
 
 process thermal_detector_input
   :: image_filter
