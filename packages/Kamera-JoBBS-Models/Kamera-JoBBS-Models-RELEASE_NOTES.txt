@@ -1,2 +1,6 @@
+__ Kamera-JoBBS-Models-v2021.03.19 __
+ - Add ENV variable to csv output paths so that csv save in the correct flight folder /$ENV{DETECTION_CSV_DIR}/$ENV{NODE_HOSTNAME}
+ - Moved JoBSS.config from configs/ to configs/pipelines/
+
 __ Kamera-JoBBS-Models-v2021.02.12 __
 Initial release
