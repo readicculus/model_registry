@@ -171,7 +171,7 @@ process optical_writer_csv
   :frame_list_output                           /$ENV{DETECTION_CSV_DIR}/$ENV{NODE_HOSTNAME}_[CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}_$CONFIG{global:eo_polar_bear_model_identifier}
+  :writer:viame_csv:model_identifier           $CONFIG{global:eo_seal_model_identifier}@$CONFIG{global:detection_threshold_seal} $CONFIG{global:eo_polar_bear_model_identifier}@$CONFIG{global:detection_threshold_polar_bear}
   :writer:viame_csv:version_identifier         Dual_Region_Trigger_Otter_R_100mm_25deg
 
 connect from optical_detector_output.detected_object_set
@@ -187,7 +187,7 @@ process thermal_writer_csv
   :frame_list_output                           /$ENV{DETECTION_CSV_DIR}/$ENV{NODE_HOSTNAME}_[CURRENT_TIME]_IR_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           $CONFIG{global:ir_hotspot_model_identifier}
+  :writer:viame_csv:model_identifier           $CONFIG{global:ir_hotspot_model_identifier}@$CONFIG{global:detection_threshold_hotspot}
   :writer:viame_csv:version_identifier         Dual_Region_Trigger_Otter_R_100mm_25deg
 
 connect from thermal_detector_output.detected_object_set

@@ -1,6 +1,8 @@
 # ============================== GLOBAL PROPERTIES =================================
 # global pipeline config
 #
+include ../JoBBS.config
+
 config _pipeline:_edge
    :capacity                                   5
 
@@ -29,7 +31,7 @@ connect from in_adapt.file_name2
 
 # ==================================================================================
 
-include ../common_eo_polar_bear_yolo_detector.pipe
+include ../common_eo_arctic_seal_yolo_detector.pipe
 
 connect from downsampler.output_1
         to   optical_detector_input.image
@@ -53,9 +55,9 @@ process optical_writer_csv
   :frame_list_output                           [CURRENT_TIME]_EO_images.txt
   :writer:type                                 viame_csv
 
-  :writer:viame_csv:model_identifier           $CONFIG{global:eo_polar_bear_model_identifier}
-  :writer:viame_csv:version_identifier         EO_Polar_Bear_Detector
-  
+  :writer:viame_csv:model_identifier		       $CONFIG{global:eo_seal_model_identifier}@$CONFIG{global:detection_threshold_seal}
+  :writer:viame_csv:version_identifier 		     EO_Seal_Detector  
+
 connect from optical_detector_output.detected_object_set
         to   optical_writer_csv.detected_object_set
 connect from downsampler.output_2
