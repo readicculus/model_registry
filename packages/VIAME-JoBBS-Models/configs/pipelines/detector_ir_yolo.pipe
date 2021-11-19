@@ -13,6 +13,7 @@ config _scheduler
 process input
   :: video_input
   :video_filename                              input_list.txt
+  :no_path_in_name                             false
   :frame_time                                  0
   :exit_on_invalid                             true
   :video_reader:type                           image_list

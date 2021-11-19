@@ -1,3 +1,6 @@
+__ VIAME-JoBBS-Models-v2021.11.18 __
+- set no_path_in_name in the video_input process to false so that we output the full image path.  This only effects command line pipelines.
+
 __ VIAME-JoBBS-Models-v2021.02.23 __
 - Add threshold to output csv info in format model_name@threshold
 - Change output filenames to contain the pipeline filename that was run
