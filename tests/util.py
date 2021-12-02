@@ -8,6 +8,7 @@ import pathlib as pl
 TEST_DIR = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.dirname(TEST_DIR)
 OBJECT_DETECTION_DIR = os.path.join(PROJECT_ROOT, 'packages/VIAME-JoBBS-Models/examples/object_detection')
+EXAMPLE_IMAGE_DIR = os.path.join(PROJECT_ROOT, 'packages/VIAME-JoBBS-Models/examples/example_imagery/arctic_seal_example_set1')
 
 test_config = os.path.join(TEST_DIR, 'config.ini')
 config = configparser.ConfigParser()
@@ -17,7 +18,7 @@ def get_sealtk_dir():
     return config['TestConfig'].get('sealtk_setup')
 
 def get_image_list_path(fn):
-    return os.path.join(OBJECT_DETECTION_DIR, fn)
+    return os.path.join(EXAMPLE_IMAGE_DIR, fn)
 
 class TestCaseBase(unittest.TestCase):
     log = None
@@ -48,6 +49,9 @@ class TestCaseBase(unittest.TestCase):
 
     def setUp(self) -> None:
         self._setup()
+        if os.path.isdir(self.temp_dir):
+            shutil.rmtree(self.temp_dir)
+        os.makedirs(self.temp_dir, exist_ok=True)
 
     def tearDown(self) -> None:
         try:
@@ -58,12 +62,15 @@ class TestCaseBase(unittest.TestCase):
         except:
             pass
 
-    @classmethod
-    def setUpClass(cls) -> None:
-        if os.path.isdir(cls.temp_dir):
-            shutil.rmtree(cls.temp_dir)
+        if os.path.isdir(self.temp_dir):
+            shutil.rmtree(self.temp_dir)
 
-        os.makedirs(cls.temp_dir, exist_ok=True)
+    # @classmethod
+    # def setUpClass(cls) -> None:
+    #     if os.path.isdir(cls.temp_dir):
+    #         shutil.rmtree(cls.temp_dir)
+    #
+    #     os.makedirs(cls.temp_dir, exist_ok=True)
 
     # @classmethod
     # def tearDownClass(cls) -> None:
