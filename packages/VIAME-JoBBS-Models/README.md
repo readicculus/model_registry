@@ -1,6 +1,26 @@
 # VIAME JoBBS Models
 Pipelines for use in desktop applications VIAME, SEAL-TK, or through the command line kwiver pipeline runner.
 
+### Folder structure
+```
+VIAME-JoBBS-Models
+├── configs/
+│   ├── pipelines/                          
+│   │   ├── embedded_dual_stream/           # pipelines for dual view GUI (seal_tk)
+│   │   ├── embedded_single_stream/         # single stream pipelines (viame)
+│   │   ├── models/                         # Darknet model files (.cfg, .weights, .names) for each model.
+│   │   ├── transformations/                # .h5 transformation files for JoBSS (you should put your h5 files you want to use here as well)
+│   │   ├── common_*.pipe                   # re-usable "common" pipelines
+│   │   └── detector_*.pipe                 # command line pipelines
+│   └── JoBBS.config                        # Configuration file for the pipelines see below (JoBBS Global Config)
+├── examples/
+│   ├── example_imagery/                    # Folder containing example imagery for the object_detection examples to use
+│   └── object_detection/                   # Linux (.sh) and Windows (.bat) example scripts for running each pipeline
+└── VIAME-JoBBS-Models_RELEASE_NOTES.txt    # Release notes for versions
+```
+
+# Documentation
+
 ### JoBBS Global Config
 This config is global so changes to the values here will change it in all JoBBS pipelines.  Most pipelines only use a few of these parameters, so for example changing `trigger_threshold` will not effect runs of an ir-only or eo-only detector.
 

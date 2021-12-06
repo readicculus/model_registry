@@ -1,5 +1,7 @@
-__ VIAME-JoBBS-Models-v2021.11.18 __
+__ VIAME-JoBBS-Models-v2021.12.01 __
 - set no_path_in_name in the video_input process to false so that we output the full image path.  This only effects command line pipelines.
+- added more documentation
+- got rid of the VIAME-JoBBS-Models-VERSION.txt file because version information can be found in this file or in the JoBBS.config file and csv outputs so the additional version txt file seeems unnecessary.
 
 __ VIAME-JoBBS-Models-v2021.02.23 __
 - Add threshold to output csv info in format model_name@threshold
