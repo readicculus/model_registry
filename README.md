@@ -6,7 +6,7 @@ Package for in-flight detector deployement in the Kamera system.  \
 ## VIAME-JoBBS-Models
 Package for detector use in VIAME GUI, SEAL-TK GUI, and through command line bash scripts.  \
 [:notebook_with_decorative_cover: User Documentation](packages/VIAME-JoBBS-Models)  \
-[:package: VIAME-JoBBS-Models-v2021.02.23.tar.gz](https://viame.kitware.com/api/v1/file/60355380a267a85e9c328267/download)  
+[:package: VIAME-JoBBS-Models-v2021.12.01.tar.gz](https://github.com/readicculus/model_registry/raw/VIAMEE-JoBSS-Models-v2021-12-01/packages/archives/VIAME-JoBBS-Models-v2021.12.01.tar.gz)  
 
 
 # Models :robot:
