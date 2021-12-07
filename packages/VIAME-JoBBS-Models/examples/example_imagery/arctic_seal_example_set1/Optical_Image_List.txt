@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:20ec5f92a3642f4f6a1651e78123689b90892ae7fbc10cbc4b03b56404ebee72
-size 265
+test_kotz_2019_fl05_C_20190510_045635.996851_rgb.jpg
+test_kotz_2019_fl05_C_20190510_045646.602715_rgb.jpg
+test_kotz_2019_fl05_C_20190510_050445.377686_rgb.jpg
+test_kotz_2019_fl05_C_20190510_050512.565276_rgb.jpg
+test_kotz_2019_fl05_C_20190510_054145.310109_rgb.jpg
