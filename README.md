@@ -1,6 +1,7 @@
 # Pipelines
 ## Kamera-JoBBS-Models
 Package for in-flight detector deployement in the Kamera system.  \
+[:notebook_with_decorative_cover: User Documentation](packages/Kamera-JoBBS-Models)  \
 [:package: Kamera-JoBBS-Models-v2021.03.19.tar.gz](https://viame.kitware.com/api/v1/file/60551c2d8ba6bae828a04ee1/download)
 
 ## VIAME-JoBBS-Models

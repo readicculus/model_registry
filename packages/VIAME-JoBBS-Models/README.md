@@ -14,7 +14,7 @@ VIAME-JoBBS-Models
 │   │   └── detector_*.pipe                 # command line pipelines
 │   └── JoBBS.config                        # Configuration file for the pipelines see below (JoBBS Global Config)
 ├── examples/
-│   ├── example_imagery/                    # Folder containing example imagery for the object_detection examples to use
+│   ├── example_imagery/                    # Folder containing example imagery for the object_detection examples to use.  Must be downloaded now as is not in the repo anymore.
 │   └── object_detection/                   # Linux (.sh) and Windows (.bat) example scripts for running each pipeline
 └── VIAME-JoBBS-Models_RELEASE_NOTES.txt    # Release notes for versions
 ```
