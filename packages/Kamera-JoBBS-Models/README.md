@@ -2,7 +2,8 @@
 
 ## Installation
 Download the `viame-configs` archive from zenodo and copy the contents into Kamera's 
-`viame-configs` folder.
+`viame-configs` folder. To view the most up to date instructions,
+go to the github page for this project.
 
 ## Folder structure
 ```

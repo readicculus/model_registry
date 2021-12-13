@@ -2,13 +2,12 @@
 ## Kamera-JoBBS-Models
 Package for in-flight detector deployement in the Kamera system.  \
 [:notebook_with_decorative_cover: User Documentation](packages/Kamera-JoBBS-Models)  \
-[:package: Kamera-JoBBS-Models-v2021.03.19.tar.gz](https://viame.kitware.com/api/v1/file/60551c2d8ba6bae828a04ee1/download)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5765673.svg)](https://doi.org/10.5281/zenodo.5765673) (to download model and pipeline archives)
 
 ## VIAME-JoBBS-Models
 Package for detector use in VIAME GUI, SEAL-TK GUI, and through command line bash scripts.  \
 [:notebook_with_decorative_cover: User Documentation](packages/VIAME-JoBBS-Models)  \
-[:package: VIAME-JoBBS-Models-v2021.12.01.tar.gz](https://github.com/readicculus/model_registry/raw/master/packages/archives/VIAME-JoBBS-Models-v2021.12.01.tar.gz)  
-
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5765664.svg)](https://doi.org/10.5281/zenodo.5765664) (to download model, pipeline, or example archives)
 
 # Models :robot:
 Model information can be found for the following models.  These are the models used in the pipelines.

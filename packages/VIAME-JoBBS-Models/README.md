@@ -1,6 +1,13 @@
 # VIAME JoBBS Models
 Pipelines for use in desktop applications VIAME, SEAL-TK, or through the command line kwiver pipeline runner.
 
+### Installation
+Download the `configs.tar.gz` archive from Zenodo and place the contents in SEALTK/VIAME's `configs` directory.  To view the most up to date instructions,
+go to the github page for this project.
+
+To run examples you will need to download the `example_imagery.tar.gz` from Zenodo and extract it in the examples folder as seen below.  Instructions for running examples can be found
+below.
+
 ### Folder structure
 ```
 VIAME-JoBBS-Models
@@ -95,7 +102,8 @@ Notes:
 
 
 **Running command line pipelines:**  
-Example imagery is provided in the package so you can test these without changing anything but when you want to run on your own images open the `.bat`(Windows) file or the `.sh`(Linux) file and modify the image list(lists if running trigger).  
+Example imagery is provided on the Zenodo archive, the current batch and bash scripts were made to work with the example imagery.
+When you want to run on your own images open the `.bat`(Windows) file or the `.sh`(Linux) file and modify the image list(lists if running trigger).  
 
 For example to run `run_ir_yolo.bat` on your own ir images open this file and change the .txt file name to your own file:
 ```
