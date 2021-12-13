@@ -9,6 +9,7 @@ TEST_DIR = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.dirname(TEST_DIR)
 OBJECT_DETECTION_DIR = os.path.join(PROJECT_ROOT, 'packages/VIAME-JoBBS-Models/examples/object_detection')
 EXAMPLE_IMAGE_DIR = os.path.join(PROJECT_ROOT, 'packages/VIAME-JoBBS-Models/examples/example_imagery/arctic_seal_example_set1')
+VIAME_JOBSS_DIR = os.path.join(PROJECT_ROOT, 'packages/VIAME-JoBBS-Models/')
 
 test_config = os.path.join(TEST_DIR, 'config.ini')
 config = configparser.ConfigParser()
@@ -22,6 +23,7 @@ def get_sealtk_dir():
 
 def get_image_list_path(fn):
     return os.path.join(EXAMPLE_IMAGE_DIR, fn)
+
 
 class TestCaseBase(unittest.TestCase):
     log = None
