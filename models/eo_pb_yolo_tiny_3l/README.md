@@ -21,7 +21,7 @@
 **Benchmark speed (1080ti,batch_size=1): 371.2 FPS**
 
 
-| Results @ .1 IOU, Thresh = .1    | Hotspot |
+| Results @ .1 IOU, Thresh = .1    | Polar Bear |
 | ------------- | ------------- |
 | TP | 78     |
 | FP | 6     |
